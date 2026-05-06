@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telkomsel - JOTPedia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: #0f172a;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2rem;
+        }
+        .input-jot {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            width: 100%;
+            color: white;
+            outline: none;
+            font-size: 1.25rem;
+        }
+        .input-jot:focus { border-color: #3b82f6; }
+        .item-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .item-card.selected {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV BAR -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-[#0f172a]/80 backdrop-blur-md border-b border-white/10">
+        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 text-gray-400 hover:text-white transition group">
+                <div class="w-10 h-10 rounded-full glass-card flex items-center justify-center group-hover:bg-blue-600 transition">
+                    <i class="fas fa-chevron-left text-sm text-white"></i>
+                </div>
+                <span class="font-bold uppercase tracking-wider text-sm">Kembali</span>
+            </a>
+            <h1 class="text-xl font-black italic text-blue-500">JOT<span class="text-white">PEDIA</span></h1>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-6 max-w-6xl pt-32 pb-10">
+        <div class="mb-10">
+            <h2 class="text-3xl font-black uppercase italic">Telkomsel <span class="text-blue-500">Data</span></h2>
+            <p class="text-gray-400">Pilih paket Flash atau OMG! terbaikmu</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-4">
+                <div class="glass-card p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="w-7 h-7 bg-blue-600 rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                        <h3 class="font-bold">Nomor WhatsApp/HP</h3>
+                    </div>
+                    <input type="number" id="hp" placeholder="0812xxxx" class="input-jot">
+                </div>
+            </div>
+
+            <div class="lg:col-span-8">
+                <div class="glass-card p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="w-7 h-7 bg-blue-600 rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                        <h3 class="font-bold">Pilih Nominal</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="item-card" onclick="select(this, 'Flash 1.5GB', '16.500')">
+                            <div class="text-xs font-bold text-blue-500 mb-1">FLASH</div>
+                            <div class="font-black text-xl">1.5 GB / 3 Hari</div>
+                            <div class="text-gray-400 text-sm mt-2">Rp 16.500</div>
+                        </div>
+                        <div class="item-card" onclick="select(this, 'OMG 10GB', '58.000')">
+                            <div class="text-xs font-bold text-blue-500 mb-1">OMG!</div>
+                            <div class="font-black text-xl">10 GB / 30 Hari</div>
+                            <div class="text-gray-400 text-sm mt-2">Rp 58.000</div>
+                        </div>
+                    </div>
+                    <button onclick="order()" class="w-full bg-blue-600 hover:bg-blue-500 py-5 rounded-2xl font-black text-xl mt-10 transition italic uppercase tracking-tighter">
+                        Beli Sekarang <i class="fas fa-shopping-cart ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selected = "";
+        function select(el, name, price) {
+            document.querySelectorAll('.item-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            selected = name;
+        }
+        function order() {
+            const no = document.getElementById('hp').value;
+            if(!no || !selected) return alert("Lengkapi data!");
+            window.location.href = `https://wa.me/6281234567890?text=Halo JOTPedia, saya mau beli Telkomsel ${selected} untuk nomor ${no}`;
+        }
+    </script>
+</body>
+</html>

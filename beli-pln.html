@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLN - JOTPedia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: #0f172a; /* Menyelaraskan dengan warna web sekarang */
+            color: white;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2rem;
+        }
+
+        .input-jot {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            width: 100%;
+            color: white;
+            outline: none;
+            font-size: 1.25rem;
+        }
+
+        .input-jot:focus {
+            border-color: #facc15; /* Kuning khas PLN */
+        }
+
+        .item-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .item-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .item-card.selected {
+            border-color: #facc15;
+            background: rgba(250, 204, 21, 0.1);
+        }
+
+        .btn-pln {
+            background: #facc15;
+            color: #000;
+        }
+        
+        .btn-pln:hover {
+            background: #eab308;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-6">
+
+    <div class="w-full max-w-6xl">
+        <!-- Header Section -->
+        <div class="flex items-center gap-6 mb-12">
+            <a href="index.html" class="w-12 h-12 glass-card flex items-center justify-center hover:bg-yellow-500 hover:text-black transition">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div>
+                <h1 class="text-4xl font-black italic uppercase tracking-tighter">
+                    <span class="text-yellow-400">JOT</span>PEDIA
+                </h1>
+                <p class="text-gray-400 font-medium">PLN Token & Tagihan Listrik</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Step 1: ID Pelanggan -->
+            <div class="lg:col-span-4">
+                <div class="glass-card p-8 h-full">
+                    <div class="flex items-center gap-3 mb-8">
+                        <span class="w-8 h-8 bg-yellow-400 text-black rounded-full flex items-center justify-center text-sm font-bold">1</span>
+                        <h3 class="font-bold text-lg">Nomor Meter / ID Pel</h3>
+                    </div>
+                    
+                    <input type="number" id="id_pel" placeholder="12345678xxx" class="input-jot mb-4">
+                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Cek kembali nomor meter Anda</p>
+                </div>
+            </div>
+
+            <!-- Step 2: Pilih Layanan -->
+            <div class="lg:col-span-8">
+                <div class="glass-card p-8">
+                    <div class="flex items-center gap-3 mb-8">
+                        <span class="w-8 h-8 bg-yellow-400 text-black rounded-full flex items-center justify-center text-sm font-bold">2</span>
+                        <h3 class="font-bold text-lg">Pilih Jenis Layanan</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Token Listrik -->
+                        <div class="item-card" onclick="select(this, 'Token PLN 20.000', '22.000')">
+                            <div class="text-xs font-bold text-yellow-400 uppercase mb-2 tracking-tighter">Token</div>
+                            <div class="font-black text-xl mb-2">PLN 20.000</div>
+                            <div class="text-gray-400">Rp 22.000</div>
+                        </div>
+
+                        <div class="item-card" onclick="select(this, 'Token PLN 50.000', '52.000')">
+                            <div class="text-xs font-bold text-yellow-400 uppercase mb-2 tracking-tighter">Token</div>
+                            <div class="font-black text-xl mb-2">PLN 50.000</div>
+                            <div class="text-gray-400">Rp 52.000</div>
+                        </div>
+
+                        <!-- Tagihan Pascabayar -->
+                        <div class="item-card md:col-span-2" onclick="select(this, 'Tagihan Listrik (Pascabayar)', 'Cek Tagihan')">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <div class="text-xs font-bold text-yellow-400 uppercase mb-1 tracking-tighter">Pascabayar</div>
+                                    <div class="font-black text-xl">Bayar Tagihan Bulanan</div>
+                                </div>
+                                <i class="fas fa-file-invoice-dollar text-3xl text-gray-600"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Button Beli -->
+                    <button onclick="kirim()" class="w-full btn-pln py-5 rounded-2xl font-black text-xl mt-12 transition shadow-lg shadow-yellow-500/10 italic uppercase tracking-tighter">
+                        Proses Sekarang <i class="fas fa-bolt ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let selectedItem = "";
+        function select(el, name, price) {
+            document.querySelectorAll('.item-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedItem = name;
+        }
+
+        function kirim() {
+            const no = document.getElementById('id_pel').value;
+            if(!no || !selectedItem) return alert("Mohon masukkan ID Pelanggan dan pilih layanan!");
+            window.location.href = `https://wa.me/6281234567890?text=Halo JOTPedia, saya ingin pesan ${selectedItem} untuk ID Pelanggan: ${no}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOTPedia - Top Up Mobile Legends Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Animasi Background Dinamis */
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #0f172a, #1e1b4b);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        /* Efek Kartu Terpilih */
+        .selected-card {
+            border-color: #3b82f6 !important;
+            background-color: rgba(30, 58, 138, 0.5) !important;
+            transform: scale(1.03);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        /* Efek Ripple Tombol */
+        .btn-premium {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-premium:after {
+            content: "";
+            background: rgba(255, 255, 255, 0.3);
+            display: block;
+            position: absolute;
+            border-radius: 50%;
+            padding-top: 240%;
+            padding-left: 240%;
+            margin-left: -120% !important;
+            margin-top: -120%;
+            opacity: 0;
+            transition: all 0.8s;
+        }
+        .btn-premium:active:after {
+            padding-top: 0;
+            padding-left: 0;
+            margin-left: 0 !important;
+            margin-top: 0;
+            opacity: 1;
+            transition: 0s;
+        }
+    </style>
+</head>
+<body class="text-white font-sans pb-20">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-800/60 backdrop-blur-lg p-4 sticky top-0 z-50 shadow-2xl border-b border-white/5">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-black text-blue-500 tracking-tighter italic">JOT<span class="text-white">PEDIA</span></h1>
+            <a href="index.html" class="text-gray-400 hover:text-blue-400 transition flex items-center font-bold">
+                <i class="fas fa-chevron-left mr-2 text-sm"></i> Beranda
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Kolom Kiri: Branding -->
+        <div class="lg:col-span-1">
+            <div class="bg-gray-800/40 backdrop-blur-md rounded-3xl p-6 border border-white/10 sticky top-24 shadow-2xl">
+                <img src="https://via.placeholder.com/400x500?text=MLBB+HERO" class="w-full rounded-2xl mb-6 shadow-blue-500/10 shadow-2xl">
+                <h2 class="text-2xl font-black uppercase italic tracking-wider">Mobile Legends</h2>
+                <div class="h-1 w-20 bg-blue-600 my-3 rounded-full"></div>
+                <p class="text-gray-400 text-sm leading-relaxed">Top up resmi 24 jam nonstop. Masukkan ID Anda, pilih nominal, dan sistem JOTPedia akan mengirimkan diamond secara instan.</p>
+                
+                <div class="mt-8 space-y-3">
+                    <div class="flex items-center text-xs font-bold text-blue-400 bg-blue-400/5 p-3 rounded-xl border border-blue-400/20">
+                        <i class="fas fa-shield-alt mr-3"></i> SISTEM AMAN & LEGAL
+                    </div>
+                    <div class="flex items-center text-xs font-bold text-yellow-500 bg-yellow-500/5 p-3 rounded-xl border border-yellow-500/20">
+                        <i class="fas fa-bolt mr-3"></i> PENGIRIMAN INSTAN
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kolom Kanan: Form Order -->
+        <div class="lg:col-span-2 space-y-6">
+            
+            <!-- STEP 1 -->
+            <div class="bg-gray-800/40 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-xl">
+                <h3 class="text-lg font-black mb-4 flex items-center italic">
+                    <span class="bg-blue-600 w-8 h-8 rounded-lg flex items-center justify-center mr-3 shadow-lg shadow-blue-600/40">01</span>
+                    LENGKAPI DATA AKUN
+                </h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="number" id="userId" placeholder="User ID" class="bg-black/40 border border-white/10 rounded-xl p-4 focus:ring-2 focus:ring-blue-600 outline-none transition placeholder:text-gray-600">
+                    <input type="number" id="zoneId" placeholder="Zone ID" class="bg-black/40 border border-white/10 rounded-xl p-4 focus:ring-2 focus:ring-blue-600 outline-none transition placeholder:text-gray-600">
+                </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="bg-gray-800/40 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-xl">
+                <h3 class="text-lg font-black mb-4 flex items-center italic">
+                    <span class="bg-blue-600 w-8 h-8 rounded-lg flex items-center justify-center mr-3 shadow-lg shadow-blue-600/40">02</span>
+                    PILIH NOMINAL DIAMOND
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div onclick="selectItem(this, '5 Diamonds', 1575)" class="item-card cursor-pointer bg-black/30 border border-white/5 p-4 rounded-xl hover:border-blue-500 transition-all duration-300">
+                        <p class="text-[10px] font-bold text-blue-400 mb-1">PROMO</p>
+                        <p class="font-bold text-sm">5 Diamonds</p>
+                        <p class="text-white/60 text-xs mt-1 font-black">Rp 1.575</p>
+                    </div>
+                    <div onclick="selectItem(this, '50 Diamonds', 14500)" class="item-card cursor-pointer bg-black/30 border border-white/5 p-4 rounded-xl hover:border-blue-500 transition-all duration-300">
+                        <p class="text-[10px] font-bold text-yellow-500 mb-1">BEST SELLER</p>
+                        <p class="font-bold text-sm">50 Diamonds</p>
+                        <p class="text-white/60 text-xs mt-1 font-black">Rp 14.500</p>
+                    </div>
+                    <div onclick="selectItem(this, 'Weekly Diamond Pass', 28500)" class="item-card cursor-pointer bg-black/30 border border-white/5 p-4 rounded-xl hover:border-blue-500 transition-all duration-300">
+                        <p class="text-[10px] font-bold text-pink-500 mb-1">REKOMENDASI</p>
+                        <p class="font-bold text-sm">Weekly Pass</p>
+                        <p class="text-white/60 text-xs mt-1 font-black">Rp 28.500</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="bg-gray-800/40 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-xl">
+                <h3 class="text-lg font-black mb-4 flex items-center italic">
+                    <span class="bg-blue-600 w-8 h-8 rounded-lg flex items-center justify-center mr-3 shadow-lg shadow-blue-600/40">03</span>
+                    METODE PEMBAYARAN
+                </h3>
+                <div class="space-y-3">
+                    <label class="flex items-center justify-between bg-black/40 p-4 rounded-xl border border-white/5 cursor-pointer hover:border-blue-500 transition group">
+                        <div class="flex items-center">
+                            <input type="radio" name="paymethod" class="w-4 h-4 accent-blue-600 mr-4">
+                            <i class="fas fa-qrcode text-gray-500 group-hover:text-blue-500 mr-3"></i>
+                            <span class="font-bold text-sm">QRIS (All Payment)</span>
+                        </div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_QRIS.svg" class="h-4 bg-white p-0.5 rounded px-2">
+                    </label>
+                    <label class="flex items-center justify-between bg-black/40 p-4 rounded-xl border border-white/5 cursor-pointer hover:border-blue-500 transition group">
+                        <div class="flex items-center">
+                            <input type="radio" name="paymethod" class="w-4 h-4 accent-blue-600 mr-4">
+                            <i class="fas fa-wallet text-gray-500 group-hover:text-blue-500 mr-3"></i>
+                            <span class="font-bold text-sm">E-Wallet (Dana/Ovo/Gopay)</span>
+                        </div>
+                        <div class="flex gap-1">
+                            <span class="text-[8px] bg-blue-600 px-1 rounded font-bold uppercase">Dana</span>
+                            <span class="text-[8px] bg-purple-600 px-1 rounded font-bold uppercase">Ovo</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- TOMBOL BELI -->
+            <button onclick="openModal()" class="btn-premium w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl text-xl shadow-blue-600/20 shadow-2xl transition-all duration-300 active:scale-95 italic tracking-tighter">
+                KONFIRMASI PEMBELIAN
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi -->
+    <div id="modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/90 backdrop-blur-md px-4">
+        <div class="bg-gray-900 border border-white/10 w-full max-w-md rounded-3xl overflow-hidden shadow-2xl shadow-blue-500/10">
+            <div class="bg-gradient-to-r from-blue-600 to-blue-800 p-6 text-center">
+                <h3 class="font-black text-xl italic tracking-widest uppercase">Validasi Pesanan</h3>
+            </div>
+            <div class="p-8 space-y-4">
+                <div class="flex justify-between border-b border-white/5 pb-3">
+                    <span class="text-gray-400 text-sm">Target Akun</span>
+                    <span id="m-target" class="font-bold text-blue-400"></span>
+                </div>
+                <div class="flex justify-between border-b border-white/5 pb-3">
+                    <span class="text-gray-400 text-sm">Item Produk</span>
+                    <span id="m-item" class="font-bold"></span>
+                </div>
+                <div class="flex justify-between items-center pt-4">
+                    <span class="text-gray-400 italic text-xs">Total Pembayaran (Inc. Admin)</span>
+                    <span id="m-total" class="font-black text-2xl text-white"></span>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-8">
+                    <button onclick="closeModal()" class="bg-gray-800 hover:bg-gray-700 py-4 rounded-2xl font-bold transition">BATAL</button>
+                    <button onclick="finalPay()" id="btnFinal" class="bg-blue-600 hover:bg-blue-700 py-4 rounded-2xl font-black shadow-lg shadow-blue-600/20 transition">BAYAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Transaction Pop-up -->
+    <div id="live-notif" class="fixed bottom-6 left-6 bg-gray-800/90 backdrop-blur-md border-l-4 border-blue-500 p-4 rounded-r-2xl shadow-2xl z-[100] transform translate-y-40 transition-all duration-700 border border-white/5">
+        <div class="flex items-center">
+            <div class="bg-blue-600 w-10 h-10 rounded-xl flex items-center justify-center mr-4 shadow-lg shadow-blue-600/30">
+                <i class="fas fa-shopping-bag text-sm"></i>
+            </div>
+            <div>
+                <p class="text-[9px] text-blue-400 uppercase font-black tracking-widest mb-0.5">Success Order</p>
+                <p id="notif-text" class="text-xs font-bold text-gray-200">User ***902 baru saja membeli 50 Diamonds</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let pName = "";
+        let pPrice = 0;
+        const adminFee = 1250;
+
+        // 1. Fungsi Pilih Produk
+        function selectItem(el, name, price) {
+            document.querySelectorAll('.item-card').forEach(c => c.classList.remove('selected-card'));
+            el.classList.add('selected-card');
+            pName = name;
+            pPrice = price;
+        }
+
+        // 2. Logika Modal
+        function openModal() {
+            const uid = document.getElementById('userId').value;
+            const zid = document.getElementById('zoneId').value;
+            const pay = document.querySelector('input[name="paymethod"]:checked');
+
+            if(!uid || !zid || !pName || !pay) {
+                alert("Lengkapi Data, Nominal, dan Metode Pembayaran dulu ya!");
+                return;
+            }
+
+            document.getElementById('m-target').innerText = uid + " (" + zid + ")";
+            document.getElementById('m-item').innerText = pName;
+            document.getElementById('m-total').innerText = "Rp " + (pPrice + adminFee).toLocaleString('id-ID');
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        function finalPay() {
+            const b = document.getElementById('btnFinal');
+            b.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
+            b.disabled = true;
+            setTimeout(() => {
+                alert("✨ Transaksi Berhasil! Saldo JOTPedia akan segera masuk.");
+                window.location.href = "cek-pesanan.html";
+            }, 2000);
+        }
+
+        // 3. Live Notification Logic
+        const users = ["Rian", "GamerID", "Slayer", "JotBoss", "MobaLover", "Vinn"];
+        const items = ["5 Diamonds", "50 Diamonds", "Weekly Pass", "12 Diamonds"];
+
+        function triggerNotif() {
+            const n = document.getElementById('live-notif');
+            const t = document.getElementById('notif-text');
+            const u = users[Math.floor(Math.random() * users.length)];
+            const i = items[Math.floor(Math.random() * items.length)];
+
+            t.innerText = `${u}*** baru saja membeli ${i}`;
+            n.classList.remove('translate-y-40');
+            setTimeout(() => n.classList.add('translate-y-40'), 5000);
+        }
+        setInterval(triggerNotif, 15000);
+        setTimeout(triggerNotif, 3000);
+    </script>
+</body>
+</html>

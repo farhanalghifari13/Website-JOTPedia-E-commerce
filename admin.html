@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - JOTPedia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: #0f172a;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .nav-link {
+            transition: all 0.3s;
+            border-radius: 12px;
+            color: #94a3b8;
+        }
+        .nav-link:hover, .nav-link.active {
+            background: #3b82f6;
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .table-container {
+            background: rgba(30, 41, 59, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar w-72 fixed inset-y-0 left-0 p-6 hidden lg:block">
+        <div class="mb-10">
+            <h1 class="text-2xl font-black text-blue-500 italic tracking-tighter">JOT<span class="text-white">ADMIN</span></h1>
+            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">Management System</p>
+        </div>
+
+        <nav class="space-y-2">
+            <a href="#" class="nav-link active flex items-center gap-4 px-4 py-3 text-sm font-bold">
+                <i class="fas fa-chart-pie w-5"></i> Dashboard
+            </a>
+            <a href="#" class="nav-link flex items-center gap-4 px-4 py-3 text-sm font-bold">
+                <i class="fas fa-box w-5"></i> Kelola Produk
+            </a>
+            <a href="#" class="nav-link flex items-center gap-4 px-4 py-3 text-sm font-bold">
+                <i class="fas fa-shopping-cart w-5"></i> Pesanan Masuk
+            </a>
+            <a href="#" class="nav-link flex items-center gap-4 px-4 py-3 text-sm font-bold">
+                <i class="fas fa-users w-5"></i> Pelanggan
+            </a>
+            <a href="#" class="nav-link flex items-center gap-4 px-4 py-3 text-sm font-bold">
+                <i class="fas fa-cog w-5"></i> Pengaturan Web
+            </a>
+        </nav>
+
+        <div class="absolute bottom-10 left-6 right-6">
+            <button class="w-full bg-red-500/10 text-red-500 border border-red-500/20 py-3 rounded-xl font-bold text-sm hover:bg-red-500 hover:text-white transition-all">
+                <i class="fas fa-sign-out-alt mr-2"></i> Keluar
+            </button>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 lg:ml-72 p-8">
+        
+        <!-- Top Bar -->
+        <header class="flex justify-between items-center mb-10">
+            <div>
+                <h2 class="text-2xl font-black italic uppercase">Ringkasan Hari Ini</h2>
+                <p class="text-gray-400 text-sm">Pantau performa bisnis JOTPedia Anda.</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="text-right hidden md:block">
+                    <p class="text-sm font-bold italic">Admin JOTPedia</p>
+                    <p class="text-[10px] text-blue-400 font-bold uppercase">Super Admin</p>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-blue-500 flex items-center justify-center font-bold italic border-2 border-white/10">A</div>
+            </div>
+        </header>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="stat-card p-6 rounded-[2rem]">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-500/20 text-blue-500 flex items-center justify-center"><i class="fas fa-wallet text-xl"></i></div>
+                    <span class="text-green-400 text-xs font-bold">+12% <i class="fas fa-arrow-up"></i></span>
+                </div>
+                <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Total Pendapatan</p>
+                <h3 class="text-2xl font-black italic">Rp 12.450.000</h3>
+            </div>
+
+            <div class="stat-card p-6 rounded-[2rem]">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-orange-500/20 text-orange-500 flex items-center justify-center"><i class="fas fa-shopping-bag text-xl"></i></div>
+                    <span class="text-green-400 text-xs font-bold">+5% <i class="fas fa-arrow-up"></i></span>
+                </div>
+                <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Pesanan Sukses</p>
+                <h3 class="text-2xl font-black italic">142 Pesanan</h3>
+            </div>
+
+            <div class="stat-card p-6 rounded-[2rem]">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-500/20 text-purple-500 flex items-center justify-center"><i class="fas fa-user-plus text-xl"></i></div>
+                    <span class="text-red-400 text-xs font-bold">-2% <i class="fas fa-arrow-down"></i></span>
+                </div>
+                <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">User Baru</p>
+                <h3 class="text-2xl font-black italic">28 User</h3>
+            </div>
+        </div>
+
+        <!-- Recent Transactions Table -->
+        <div class="table-container rounded-[2rem] p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-black italic uppercase">Transaksi Terbaru</h3>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-xl text-xs font-bold transition-all">Lihat Semua</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-gray-500 text-xs font-bold uppercase border-b border-white/5">
+                            <th class="pb-4">No. Transaksi</th>
+                            <th class="pb-4">Layanan</th>
+                            <th class="pb-4">ID Tujuan</th>
+                            <th class="pb-4">Harga</th>
+                            <th class="pb-4">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr class="border-b border-white/5">
+                            <td class="py-5 font-bold">#JOT-88219</td>
+                            <td class="py-5">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-[10px] italic font-black">ML</div>
+                                    Mobile Legends
+                                </div>
+                            </td>
+                            <td class="py-5 font-mono">12345678 (2012)</td>
+                            <td class="py-5">Rp 55.000</td>
+                            <td class="py-5"><span class="px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-[10px] font-black uppercase">Sukses</span></td>
+                        </tr>
+                        <tr>
+                            <td class="py-5 font-bold">#JOT-88220</td>
+                            <td class="py-5">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-[10px] italic font-black">TEL</div>
+                                    Pulsa Telkomsel
+                                </div>
+                            </td>
+                            <td class="py-5 font-mono">081234567890</td>
+                            <td class="py-5">Rp 10.200</td>
+                            <td class="py-5"><span class="px-3 py-1 bg-yellow-500/10 text-yellow-500 rounded-full text-[10px] font-black uppercase">Proses</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
